@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Galería — Para mi amor</title>
+    <style>
+        :root {
+            --bg-start: #ff9a9e;
+            --bg-end: #fad0c4;
+            --accent: #ff4b6e;
+            --accent-dark: #ff1e4b;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --muted: #666;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, var(--bg-start), var(--bg-end));
+            color: #222;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 24px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08)
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--accent)
+        }
+
+        .desc {
+            color: var(--muted);
+            margin-top: 6px;
+            font-size: 0.95rem
+        }
+
+        /* Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 22px
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.85));
+            border-radius: 12px;
+            padding: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform .18s, box-shadow .18s
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12)
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block
+        }
+
+        .caption {
+            width: 100%;
+            padding: 10px 6px 0;
+            text-align: left
+        }
+
+        .caption h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: #222
+        }
+
+        .caption p {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 0.9rem
+        }
+
+        /* Buttons / back */
+        .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        .btn:hover {
+            background: var(--accent-dark)
+        }
+
+        /* Lightbox modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 60;
+            padding: 20px
+        }
+
+        .modal.open {
+            display: flex
+        }
+
+        .modal-content {
+            max-width: 920px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            background: #000
+        }
+
+        .modal-body {
+            padding: 14px
+        }
+
+        .modal-body h3 {
+            margin: 0;
+            color: var(--accent)
+        }
+
+        .modal-body p {
+            margin: 8px 0 0;
+            color: #444
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        @media (max-width:600px) {
+            .modal-img {
+                height: 320px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrap">
+        <header>
+            <div>
+                <h1>Nuestra Galería</h1>
+                <div class="desc">Pequeños momentos, grandes recuerdos. Haz clic en una imagen para verla ampliada.
+                </div>
+            </div>
+            <div class="actions">
+                <a class="btn" href="pagina1.html">Volver</a>
+            </div>
+        </header>
+
+        <section class="gallery" aria-label="Galería de recuerdos">
+            <!-- Reemplaza src por imágenes en tu carpeta images/ -->
+            <article class="card">
+                <img src="https://ibb.co/KcqKB86F" alt="Primer encuentro en Ripley"
+                    data-title="La primera vez que fuimos a la nieve juntos">
+                <div class="caption">
+                    <h3>La primera vez que fuimos juntos a la nieve</h3>
+                    <p>fue un dia muy genial que pase junto a ti</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://ibb.co/PsJpCYQw" alt="Mensajes" data-title="Nuestras conversaciones"
+                    data-desc="Cada mensaje tuyo iluminaba mi día.">
+                <div class="caption">
+                    <h3>La primera vez que pasabamos un verano juntos</h3>
+                    <p>esos dias de semana canterana fueron los mejores</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://ibb.co/kgCMTprp" alt="Primera cita" data-title="Nuestra primera cita"
+                    data-desc="Mi corazón latía muy fuerte ese día.">
+                <div class="caption">
+                    <h3>Cuando fuimos a comer completos</h3>
+                    <p>sabes, sinceramente si me gustan harto esos completos</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://ibb.co/S4bpRjns" alt="Momento feliz (gif)"
+                    data-title="Risas y felicidad" data-desc="Riendo juntos hasta que dolía.">
+                <div class="caption">
+                    <h3>Momentos lindos</h3>
+                    <p>Son tantos momentos lindos que estamos teniendo lindos</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://ibb.co/pvjFbXhn" alt="Ahora" data-title="Y ahora" data-desc="Cada día te amo más.">
+                <div class="caption">
+                    <h3>Ahora</h3>
+                    <p>Cada día mas me enamoro de ti.</p>
+                </div>
+              
+            </article>
+        </section>
+    </main>
+   <div class="actions">
+                <a class="btn" href="galeria.html">Adelante</a>
+            </div>
+
+    <!-- Modal / Lightbox -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content" role="document">
+            <button id="closeBtn" class="modal-close" aria-label="Cerrar">✕</button>
+            <img id="modalImg" class="modal-img" src="" alt="">
+            <div class="modal-body">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Selección y funcionalidad básica del lightbox
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const closeBtn = document.getElementById('closeBtn');
+
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                modalImg.src = img.src;
+                modalImg.alt = img.alt || '';
+                modalTitle.textContent = img.dataset.title || '';
+                modalDesc.textContent = img.dataset.desc || '';
+                // prevent scroll behind modal
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeModal = () => {
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+            modalImg.src = '';
+            document.body.style.overflow = '';
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+
+</html>
